@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ป้าศรีเด็กหอ — AI ช่วยคิดเมนู</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Sarabun:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css?v=3" />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo-container">
+          <img
+            src="/assets/logo.png"
+            alt="ป้าศรีเด็กหอ Logo"
+            class="app-logo"
+          />
+        </div>
+        <h1>ป้าศรีเด็กหอ</h1>
+        <p>AI ผู้ช่วยเลือกเมนูจากของที่มีในห้อง</p>
+      </header>
+
+      <main>
+        <section id="input-page" class="glass-card">
+          <div class="input-section">
+            <div class="input-group">
+              <label for="ingredients">วัตถุดิบที่มี (คั่นด้วยคอมม่า)</label>
+              <input
+                type="text"
+                id="ingredients"
+                placeholder="เช่น ไข่ไก่, ปลากระป๋อง, มาม่า..."
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="equipment">อุปกรณ์ที่มี</label>
+              <select id="equipment">
+                <option value="all">
+                  มีครบ (เตาไฟฟ้า, หม้อหุงข้าว, ไมโครเวฟ)
+                </option>
+                <option value="rice_cooker">มีแค่หม้อหุงข้าว</option>
+                <option value="microwave">มีแค่ไมโครเวฟ</option>
+                <option value="electric_stove">มีแค่เตาไฟฟ้า</option>
+              </select>
+            </div>
+
+            <button id="recommend-btn" class="btn-primary">
+              <span>ถามป้าศรีเลย</span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <section id="loading-page" class="hidden">
+          <div class="loading-container">
+            <span class="loader"></span>
+            <p style="margin-top: 1rem; color: var(--text-muted)">
+              ป้าศรีกำลังค้นหาเมนูอร่อยๆ ให้รอแป๊บน้า...
+            </p>
+          </div>
+        </section>
+
+        <section id="results-page" class="hidden">
+          <div class="glass-card">
+            <h2 style="margin-bottom: 2rem; text-align: center">
+              เมนูที่ป้าแนะนำจ้า
+            </h2>
+            <div id="results-container" class="results-grid">
+              <!-- Cards injected by JS -->
+            </div>
+
+            <div class="guardrail">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="vertical-align: middle; margin-right: 5px"
+              >
+                <path
+                  d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
+                />
+                <path d="M12 9v4" />
+                <path d="M12 17h.01" />
+              </svg>
+              โปรดตรวจสอบวันหมดอายุของวัตถุดิบก่อนปรุงอาหาร
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem">
+              <button
+                id="back-btn"
+                class="btn-reject"
+                style="width: auto; padding: 0.8rem 2rem"
+              >
+                ลองใส่ใหม่อีกรอบ
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Steps Modal -->
+    <div id="steps-modal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <button id="modal-close" class="modal-close-btn">&times;</button>
+        <h2 id="modal-title" class="modal-title"></h2>
+        <ol id="modal-steps" class="steps-list"></ol>
+      </div>
+    </div>
+
+    <script src="script.js?v=6"></script>
+  </body>
+</html>
