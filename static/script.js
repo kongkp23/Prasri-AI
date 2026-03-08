@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     recommendation_id: recommendationId,
-                    rating: 1,
+                    rating: 2,
                     comment: `ไม่เหมาะสม: ${menuName}`
                 })
             });
