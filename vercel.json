@@ -1,22 +1,16 @@
 {
-  "builds": [
+  "rewrites": [
     {
-      "src": "app/main.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/app/main.py"
+      "source": "/api/(.*)",
+      "destination": "/api/index"
     },
     {
-      "src": "/",
-      "dest": "/static/index.html"
+      "source": "/",
+      "destination": "/static/index.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/static/$1"
+      "source": "/(.*)",
+      "destination": "/static/$1"
     }
   ]
 }
