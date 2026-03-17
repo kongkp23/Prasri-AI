@@ -7,7 +7,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Global client for reuse
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client = None
+try:
+    api_key = os.getenv("GEMINI_API_KEY")
+    if api_key:
+        client = genai.Client(api_key=api_key)
+    else:
+        print("Warning: GEMINI_API_KEY is not set.")
+except Exception as e:
+    print(f"Error initializing Gemini: {e}")
 
 # Use sync function for stability as requested by new SDK patterns
 def _get_menu_recommendations_sync(ingredients, matching_menus):
@@ -39,6 +47,9 @@ def _get_menu_recommendations_sync(ingredients, matching_menus):
     """
     
     try:
+        if not client:
+            raise ValueError("Gemini client is not initialized. Check GEMINI_API_KEY environment variable.")
+            
         # We've tested that gemini-2.5-flash is the available model for this key/library combo
         response = client.models.generate_content(
             model="gemini-2.5-flash",
